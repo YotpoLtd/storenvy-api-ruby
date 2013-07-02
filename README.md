@@ -47,7 +47,7 @@ oauth_client = OAuth2::Client.new "app_key",
                                   "secret",
                                   {:site => "https://api.storenvy.com/oauth"}
 
-access_token = oauth_client.auth_code.get_token params[:code], {:redirect_uri => "https://www.yotpo.com/storenvy/finalize"}
+access_token = oauth_client.auth_code.get_token params[:code], {:redirect_uri => redirect_uri}
 shop_token = access_token.token
 
 ```
