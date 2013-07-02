@@ -1,6 +1,5 @@
 # Storenvy::Api::Ruby
 
-TODO: Write a gem description
 
 ## Installation
 
