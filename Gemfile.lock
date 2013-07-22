@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    storenvy-api (0.0.1)
+    storenvy-api (0.0.2)
       activesupport
       faraday
       faraday_middleware

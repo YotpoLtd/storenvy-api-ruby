@@ -9,6 +9,8 @@ module Storenvy
         body = false
         if env[:status] == 200
           body = env[:response].body.response || env[:response].body
+        elsif env[:status] == 401
+          raise Storenvy::ResponseParser::HTTPUnauthorized.new 'invalid storeenvy credentials'
         elsif env[:response] && env[:response].body && env[:response].body.status
           body = env[:response].body.status
         end
@@ -26,7 +28,10 @@ module Storenvy
     end
 
     define_parser do |body|
-      ::Oj.load(body, mode: :compat) unless body.strip.empty?
+      begin
+        ::Oj.load(body, mode: :compat) unless body.strip.empty?
+      rescue Oj::ParseError => e
+      end
     end
   end
 
@@ -76,6 +81,9 @@ module Storenvy
       type = env[:request_headers][CONTENT_TYPE].to_s
       type = type.split(';', 2).first if type.index(';')
       type
+    end
+
+    class Storenvy::ResponseParser::HTTPUnauthorized < Exception
     end
   end
 end
