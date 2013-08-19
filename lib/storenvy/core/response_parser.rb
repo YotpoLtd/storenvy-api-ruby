@@ -7,7 +7,7 @@ module Storenvy
       # "env" contains the request
       @app.call(env).on_complete do
         body = false
-        if env[:status] == 200
+        if env[:status] >= 200 || env[:status] < 300
           body = env[:response].body.response || env[:response].body
         elsif env[:status] == 401
           raise Storenvy::ResponseParser::HTTPUnauthorized.new 'invalid storeenvy credentials'
