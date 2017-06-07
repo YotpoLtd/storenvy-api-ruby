@@ -3,6 +3,7 @@ require 'faraday'
 require 'typhoeus'
 require 'typhoeus/adapters/faraday'
 require 'faraday_middleware'
+require 'faraday_middleware/parse_oj'
 require 'storenvy/core/response_parser'
 require 'storenvy/version'
 require 'storenvy/api/order'
@@ -122,11 +123,10 @@ module Storenvy
 
         conn.use Storenvy::ResponseParser
 
-        # Set the response to be rashified
-        conn.response :rashify
+        # Set the response to be mashified
+        conn.response :mashify
 
-        # Setting request and response to use JSON/XML
-        conn.request :oj
+        # Setting request and response to use JSON using Oj
         conn.response :oj
 
         # Set to use instrumentals to get time logs
