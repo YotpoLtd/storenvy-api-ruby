@@ -1,4 +1,6 @@
 pkg
 .DS_Store
 .idea/
-
+.ruby-version
+.ruby-gemset
+Gemfile.lock
